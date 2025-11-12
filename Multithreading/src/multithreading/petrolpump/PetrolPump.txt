@@ -1,0 +1,280 @@
+Q1)
+---
+Your task is to create a Java program that simulates a scenario where multiple cars arrive at a petrol pump for refilling. The program should utilize multithreading concepts with synchronization to manage concurrent refilling operations at the petrol pump. The main goal is to observe and record which car completes the refilling process first.
+
+Instructions:
+
+PetrolPump Class:
+
+Create a PetrolPump class with the following attribute and method:
+refillCar(String carName): A synchronized method simulating the refilling process. Ensure that only one car can execute this method at a time.
+Simulation Details:
+In the refillCar method, print messages to indicate when a car starts and completes refilling. Use the format: <CarName> started refilling... and <CarName> completed refilling!.
+Implement a sleep period in the refillCar method (e.g., Thread.sleep(3000)) to simulate the time it takes for a car to refill.
+
+Car Class:
+
+Create a Car class that implements the Runnable interface. Include the following members:
+name (String): The name of the car.
+petrolPump (PetrolPump): A reference to the petrol pump.
+run(): Implement the run method from the Runnable interface. Inside this method, call the refillCar method of the petrol pump to simulate the refilling process.
+
+PetrolPumpSimulation Class (Main):
+
+In the main method, create an instance of PetrolPump.
+Create an array of Car objects, each initialized with a unique name and the reference to the petrol pump.
+Create an array of Thread objects to represent each car's thread.
+Start each car thread and wait for all car threads to complete using the join method.
+
+
+Note:
+
+Use the synchronized keyword to achieve synchronization without using Semaphore.
+Ensure proper exception handling for InterruptedException.
+Your implementation should be well-documented with comments explaining the logic of each class and method.
+Adjust the sleep time and other parameters based on your desired simulation.
+
+Output :
+---------
+<Ford> started filling
+<Ford> completed filling
+<Naxon> started filling
+<Naxon> completed filling
+<Maruti> started filling
+<Maruti> completed filling
+
+public class PetrolPumpSimulation {
+    public static void main(String... args)throws InterruptedException{
+        Thread t1 = new Thread(new Car("Ford",new PetrolPump()));
+        Thread t2 = new Thread(new Car("Nexon",new PetrolPump()));
+        Thread t3 = new Thread(new Car("Maruti",new PetrolPump()));
+        t1.start();
+        t1.join();
+        t2.start();
+        t2.join();
+        t3.start();
+    }
+ }
+ class PetrolPump
+ {
+    void refillCar(String carName)
+    {
+        System.out.println(carName+" started refilling....");
+        try{
+            Thread.sleep(3000);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(carName+" completed refilling");
+    }
+ }
+ class Car implements Runnable{
+    String name;
+    PetrolPump petroPump;
+    public Car(String name,PetrolPump petroPump)
+    {
+        this.name = name;
+        this.petroPump = petroPump;
+    }
+    @Override
+    public void run()
+    {
+        new PetrolPump().refillCar(name);
+    }
+ }
+-------------------------------------------------------------------------
+1.	What is the output of the following code
+public class MultiThread implements Runnable
+{
+	public static void main(String[] args) throws InterruptedException {
+		Thread thread = new Thread(new MultiThread());
+		thread.start();
+		System.out.print("nit ");
+		thread.join();
+		System.out.println("google ");
+	}
+	@Override
+	public void run() {
+		System.out.println("NareshIT");
+	}
+}
+
+
+2.	What is the output of the following code
+class Test extends Thread
+{
+	@Override
+	public void run() {
+		System.out.println("Run");
+		super.run();
+	}
+	
+	@Override
+	public synchronized void start() {
+		System.out.println("Start");
+		super.start();
+	}	
+}
+public class MultiThread
+{
+	public static void main(String[] args) {
+		nit();
+	}
+	
+	static public void nit() {
+		Test test = new Test();
+		test.start();
+	}
+}
+
+
+3.	What is the output of the following code
+class Test extends Thread
+{
+	int a;
+	public void run() {
+		a++;
+	}
+}
+public class MultiThread
+{
+	public static void main(String[] args) {
+		Test test = new Test();
+		test.run();
+		System.out.println(test.a);
+		test.start();
+		System.out.println(test.a);
+		System.out.println(test.isAlive());
+		System.out.println(test.getName());		
+	}
+}
+
+
+4.	What is the output of the following code
+public class MultiThread extends Thread
+{
+	public void run() {
+		System.out.println(Thread.currentThread().getId());
+	}
+	public static void main(String[] args) {
+		MultiThread nit = new MultiThread();
+		for(int i=0;i<10;i++)
+		{
+			nit.start();
+		}
+	}
+}
+
+
+5.	What is the output of the following code
+public class MultiThread extends Thread
+{
+	public void run() {
+		System.out.print(Thread.currentThread().getId()+" ");
+	}
+	public static void main(String[] args) {
+		for(int i=0;i<10;i++)
+		{
+			MultiThread nit = new MultiThread();
+			nit.start();
+		}
+	}
+}
+
+
+6.	What is the output of the following code
+public class MultiThread extends Thread
+{
+	public void run() {
+		System.out.print(Thread.currentThread().getId()+" ");
+	}
+	
+	@Override
+	public void start() {
+		System.out.print(Thread.currentThread().getName()+" ");
+	}
+	
+	public static void main(String[] args) {
+		MultiThread nit = new MultiThread();
+		for(int i=0;i<10;i++)
+		{
+			nit.start();
+		}
+	}
+}
+
+7.	What is the output of the following code
+public class MultiThread extends Thread
+{
+	public void run() {
+		System.out.print(Thread.currentThread().getId()+" ");
+	}
+	
+	@Override
+	public void start() {
+		System.out.print(Thread.currentThread().getName()+" ");
+	}
+	
+	public static void main(String[] args) {
+		MultiThread nit = new MultiThread();
+		for(int i=0;i<10;i++)
+		{
+			nit.run();
+		}
+	}
+}
+
+8.	What is the output of the following program
+public class MultiThread implements Runnable
+{
+	Thread thread;
+	public MultiThread() {
+		thread = new Thread(this);
+		thread.start();
+	}
+	public void run() {
+		System.out.println(thread);
+		
+	}	
+	public static void main(String[] args) {
+		new MultiThread();
+	}
+}
+
+
+9.	What is the output of the following program
+public class MultiThread implements Runnable
+{
+	Thread thread;
+	public MultiThread() {
+		thread = new Thread(this,"NareshIT");
+		thread.setPriority(6);
+		thread.start();
+	}
+	public void run() {
+		System.out.println(thread);
+		
+	}
+	public static void main(String[] args) {
+		new MultiThread();
+	}
+}
+
+
+10.	What is the output of the following program
+public class MultiThread extends Thread
+{	
+	public static void main(String[] args) {
+		MultiThread m1 = new MultiThread();
+		MultiThread m2 = new MultiThread();
+		MultiThread m3 = new MultiThread();
+		m1.start();
+		m2.start();
+		m3.start();
+	}
+	
+public void run() {
+		System.out.println(Thread.currentThread().getName());
+	}
+}
