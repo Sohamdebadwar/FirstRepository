@@ -1,0 +1,172 @@
+Interface With Factory Design Pattern
+
+Assignment 01 :
+---------------
+Develop a scenario based program using interface for Payment Processing and apply discount using Factory Method.
+
+Coding Requirements :
+----------------------
+Take an interface called Payment.
+
+Methods :
+
+1) Method Name     : processPayment()
+   Parameter       : No Parameter
+   Return Type     : void
+   Access Modifier : public
+   Modifier	   : abstract
+
+
+2) Method Name     : applyDiscount()
+   Parameter       : No Parameter
+   Return Type     : void
+   Access Modifier : public
+     Modifier	   : abstract
+
+
+Take two implementer classes CreditCardPayment and UPIPayment and override both the abstract methods.
+[See the Test Cases for Output]
+
+
+Take another BLC class PaymentGateway
+
+Methods :
+
+1) Method Name     : initiatePayment()
+   Parameter       : payment Of type Payment
+   Return Type     : Payment [Factory Method]
+   Access Modifier : public
+     
+In this method, With the help of parameter variable payment, receive the object of CreditCardPayment and UPIPayment, return CreditCardPayment object OR UPIPayment object [Factory Method] with some message like "Initiating Credit Card payment" OR "Initiating UPI payment" [See Test Cases for Details] 
+
+
+Take an ELC class called PaymentGatewayUsingInterface with main method. Take Scanner and PaymentGateway class object with switch case to pass the following Test Cases.
+
+
+Test Cases for Output :
+------------------------
+Test Case 1 :
+-------------
+Select your payment Option :
+	 1) Credit Card 
+	 2) UPI 
+Please Enter your Choice :
+1
+Initiating Credit Card payment.
+Applying 10% discount for credit card users.
+Processing credit card payment...
+
+
+Test Case 2 :
+--------------
+Select your payment Option :
+	 1) Credit Card 
+	 2) UPI 
+Please Enter your Choice :
+2
+Initiating UPI payment.
+Applying ₹100 cashback for UPI users.
+Processing UPI payment...
+
+Test Case 3 :
+-------------
+Select your payment Option :
+	 1) Credit Card 
+	 2) UPI 
+Please Enter your Choice :
+3
+Wrong Choice...
+-------------------------------------------------------------------------
+Assignment 02 
+--------------
+Develop a Program on Factory Method where method return type is interface.
+
+Coding Requirement :
+---------------------
+Take a Functional interface Printer which contains a print() method.
+
+Methods :
+
+1) Method Name     : print()
+   Parameter       : No Parameter
+   Return Type     : void
+   Access Modifier : public
+   Modifier   : abstract
+
+Take another class PrinterDemo.
+
+1) Method Name     : getPrinter()
+   Parameter       : No Parameter
+   Return Type     : Printer [Factory Method (Factory Design Pattern)]
+   Access Modifier : public
+ 
+   In this method override the print() method of Printer interface, using anonymous inner class WITHOUT REFERENCE and return the anonymous inner class object.
+   
+Take an ELC class InterfaceImplementationByUsingAnonymous.
+Create the PrinterDemo object and call the print method.
+
+
+Code :
+
+import java.util.Scanner;
+
+public class InterfaceImplementationByUsingAnonymous
+{
+    public static void main(String [] args)
+    {
+        PrinterDemo p = new PrinterDemo();
+
+        p.getPrinter().print();
+    }
+}
+
+@FunctionalInterface
+interface Printer
+{
+     public abstract void print();
+}
+
+ class PrinterDemo 
+{
+
+    public Printer getPrinter()
+    {
+    return new Printer()
+    {
+        public void print() 
+        {
+        System.out.println("Hello from Printer implemented using Anonymous Inner Class!");
+        }
+    };
+    }
+}
+
+
+-----------------------------------------------------------------------------------------
+Assignment 03 :
+---------------
+Develop a Program on Factory Method where method return type is interface.
+
+Coding Requirement :
+---------------------
+Take a Functional interface Printer which contains a print() method.
+
+Methods :
+
+1) Method Name     : print()
+   Parameter       : No Parameter
+   Return Type     : void
+   Access Modifier : public
+   Modifier   : abstract
+
+Take another class PrinterDemo.
+
+1) Method Name     : getPrinter()
+   Parameter       : No Parameter
+   Return Type     : Printer [Factory Method (Factory Design Pattern)]
+   Access Modifier : public
+ 
+   In this method override the print() method of Printer interface, using anonymous inner class WITHOUT REFERENCE and return the anonymous inner class object.
+   
+Take an ELC class InterfaceImplementationByUsingAnonymous.
+Create the PrinterDemo object and call the print method.
